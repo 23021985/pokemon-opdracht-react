@@ -2,7 +2,7 @@ import axios from "axios";
 
 import React, { useState, useEffect} from "react";
 
-function Pokemon(props){
+function PokemonCard(props){
     const [pokemon, setPokemon] = useState(null);
     console.log("state in card", pokemon)
 
@@ -21,16 +21,25 @@ function Pokemon(props){
 
 
     return(
-        <div className="card">
-            <h1>{pokemon?.name}</h1>
-            <div>{pokemon.abilities.map(ability => {
-                return(ability.ability.name)
-            })}</div>
-            <img src={pokemon?.sprites.front_default}/>
+<div className="card">
+        {pokemon ? (
+        <div className="card1">
+            <h1>{pokemon.name}</h1>
+            <img src={pokemon.sprites.front_default}/>
+            <p><b>Moves:</b>{pokemon.moves.length}</p>
+            <p><b>Weight:</b>{pokemon.weight}</p>
+            <div className="abi">{pokemon.abilities.map(ability => {
+                return <p>{ability.ability.name}</p>
+
+            })}</div> </div>
+            ):(<h3>loading..</h3>
+        )}
         </div>
+
     )
+
 }
 
 
 
-export default Pokemon;
+export default PokemonCard;
